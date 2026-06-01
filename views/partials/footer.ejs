@@ -1,0 +1,89 @@
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3><%= company.name %></h3>
+          <p><%= company.tagline %></p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#hero" id="foot-link-home">Home</a></li>
+            <li><a href="#visi-misi" id="foot-link-about">About Us</a></li>
+            <li><a href="#products" id="foot-link-products">Products</a></li>
+            <li><a href="#contact" id="foot-link-contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Official Links</h4>
+          <ul>
+            <li><a href="https://fgta5js.ferrine.com" target="_blank" rel="noopener noreferrer" id="foot-link-fgta5">fgta5js Framework</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <%= new Date().getFullYear() %> <%= company.name %> (Aplikasi Nusantara). All Rights Reserved.</p>
+        <p>Built with Integrity in Indonesia</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation toggle
+    const navToggle = document.getElementById('nav-toggle-btn');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('show');
+        // Simple visual toggle for burger menu
+        const spans = navToggle.querySelectorAll('span');
+        spans[0].style.transform = navMenu.classList.contains('show') ? 'rotate(45deg) translate(5px, 6px)' : 'none';
+        spans[1].style.opacity = navMenu.classList.contains('show') ? '0' : '1';
+        spans[2].style.transform = navMenu.classList.contains('show') ? 'rotate(-45deg) translate(5px, -6px)' : 'none';
+      });
+    }
+
+    // Scroll active link styling
+    const sections = document.querySelectorAll('section, header');
+    const navLi = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - 120)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLi.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href').includes(current)) {
+          a.classList.add('active');
+        }
+      });
+    });
+  </script>
+  
+  <style>
+    /* CSS inline for dynamic showing menu in mobile since it uses JS */
+    @media (max-width: 768px) {
+      .nav-links.show {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: var(--shadow-md);
+        padding: 2rem;
+        gap: 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+    }
+  </style>
+</body>
+</html>
